@@ -1,204 +1,44 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hello/drawer_list.dart';
-import 'package:flutter_hello/pages/hello_listview.dart';
-import 'package:flutter_hello/pages/hello_page2.dart';
-import 'package:flutter_hello/pages/hello_page3.dart';
-import 'package:flutter_hello/utils/nav.dart';
-import 'package:flutter_hello/widgets/blue_button.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Primeiro App"),
-          bottom: TabBar(tabs: [
-            Tab(text: "TAB 1",),
-            Tab(text: "TAB 2",),
-            Tab(text: "TAB 3",),
-          ]),
-        ),
-        body: TabBarView(children: [
-          _body(context),
-          Container(
-            color: Colors.green,
-          ),
-          Container(
-            color: Colors.yellow,
-          )
-        ]),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {
-            _onClickFab();
-          },
-        ),
-        drawer: DrawerList(),
+    var scaffold = Scaffold(
+      appBar: AppBar(
+        title: Text("Olá Flutter"),
       ),
+      body: _body(),
     );
+    return scaffold;
   }
+}
 
-  _onClickFab() {
-    print("Adicionar");
-  }
+Container _body() {
+  // Não precisaria do Container, vou deixar pra ficar explicito !
+  return Container(
+    color: Colors.white,
+    child: Center(
+      child: _text(),
+    ),
+  );
+}
 
-  _body(context) {
-    return Container(
-      padding: EdgeInsets.only(top: 16),
-      color: Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          _text(),
-          _pageView(),
-          _buttons(),
-        ],
-      ),
-    );
-  }
+Text _text() {
+  return Text(
+    "Olá Worlld",
+    style: TextStyle(
+      color: Colors.blue,
+      fontSize: 30,
+      fontWeight: FontWeight.bold,
+      fontStyle: FontStyle.italic,
+      decoration: TextDecoration.underline,
+      decorationColor: Colors.red,
+      decorationStyle: TextDecorationStyle.wavy,
+    ),
+  );
+}
 
-  _pageView() {
-    return Container(
-      margin: EdgeInsets.only(top: 20, bottom: 20),
-      height: 300,
-      child: PageView(
-        children: <Widget>[
-          _img("assets/images/dog1.png"),
-          _img("assets/images/dog2.png"),
-          _img("assets/images/dog3.png"),
-          _img("assets/images/dog4.png"),
-          _img("assets/images/dog5.png")
-        ],
-      ),
-    );
-  }
-
-  _buttons() {
-    return Builder(
-      builder: (context) {
-        return Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                BlueButton("Dança",
-                    onPressed: () =>
-                        _onClickNavigator(context, HelloListView())),
-                BlueButton("Música",
-                    onPressed: () => _onClickNavigator(context, HelloPage2())),
-                BlueButton("Carinho",
-                    onPressed: () => _onClickNavigator(context, HelloPage3())),
-              ],
-            ),
-            //   Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   children: <Widget>[
-            //     BlueButton("Lista - Dança",
-            //         onPressed: () =>
-            //             _onClickNavigator(context, HelloListView())),
-            //     BlueButton("Pagina 2 - Música",
-            //         onPressed: () => _onClickNavigator(context, HelloPage2())),
-            //     BlueButton("Página 3 - Carinho",
-            //         onPressed: () => _onClickNavigator(context, HelloPage3())),
-            //   ],
-            // ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                BlueButton("Lara", onPressed: () => _onClickSnack(context)),
-                BlueButton("Lordinho", onPressed: () => _onClickDialog(context)),
-                BlueButton("Filhotes", onPressed: _onClickToast)
-              ],
-            )
-          ],
-        );
-      },
-    );
-  }
-
-  void _onClickNavigator(BuildContext context, Widget page) async {
-    String s = await push(context, page);
-
-    print(">> $s");
-  }
-
-  _onClickSnack(context) {
-    Scaffold.of(context).showSnackBar(
-      SnackBar(
-        content: Text("Olá Flutter"),
-        action: SnackBarAction(
-          textColor: Colors.yellow,
-          label: "OK",
-          onPressed: () {
-            print("OK!");
-          },
-        ),
-      ),
-    );
-  }
-
-  _onClickDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return WillPopScope(
-          onWillPop: () async => false,
-          child: AlertDialog(
-            title: Text("Flutter é muito legal"),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Cancelar"),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              FlatButton(
-                child: Text("OK"),
-                onPressed: () {
-                  Navigator.pop(context);
-                  print("OK !!!");
-                },
-              )
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  _onClickToast() {
-    Fluttertoast.showToast(
-        msg: "Flutter é muito legal",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIos: 5,
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-        fontSize: 16.0);
-  }
-
-  _img(String img) {
-    return Image.asset(
-      img,
-      fit: BoxFit.cover,
-    );
-  }
-
-  _text() {
-    return Text(
-      "Bom dia Cariño!!",
-      style: TextStyle(
-          color: Colors.blue,
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-          fontStyle: FontStyle.italic,
-          decoration: TextDecoration.underline,
-          decorationColor: Colors.red,
-          decorationStyle: TextDecorationStyle.wavy),
-    );
-  }
+Text _text2() {
+  return Text("Hello");
 }
