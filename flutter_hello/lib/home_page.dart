@@ -6,7 +6,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var scaffold = Scaffold(
       appBar: AppBar(
-        title: Text("Olá Flutter"),
+        title: Text("Olá Fluter"),
       ),
       body: _body(),
     );
@@ -18,18 +18,27 @@ Container _body() {
   // Não precisaria do Container, vou deixar pra ficar explicito !
   return Container(
     color: Colors.white,
-    child: Center(
-      child: _text(),
-    ),
+    child: _img(),
   );
+}
+
+Image _img() {
+  return Image.asset(
+      'assets/images/dog2.png',
+    width: 300,
+    height: 300,
+    fit: BoxFit.fill
+  );
+//  return Image.network(
+//      'https://preview.free3d.com/img/2017/04/2140154274204616055/0ejxkp2a-900.jpg');
 }
 
 Text _text() {
   return Text(
-    "Olá Worlld",
+    "Olá World",
     style: TextStyle(
       color: Colors.blue,
-      fontSize: 30,
+      fontSize: 40,
       fontWeight: FontWeight.bold,
       fontStyle: FontStyle.italic,
       decoration: TextDecoration.underline,
