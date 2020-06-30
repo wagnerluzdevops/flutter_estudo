@@ -6,7 +6,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var scaffold = Scaffold(
       appBar: AppBar(
-        title: Text("Olá Fluter"),
+        title: Text("Olá Flutter"),
       ),
       body: _body(),
     );
@@ -18,8 +18,29 @@ Container _body() {
   // Não precisaria do Container, vou deixar pra ficar explicito !
   return Container(
     color: Colors.white,
-    child: _img(),
+    child: Center(
+      child:  _button(),
+    )
   );
+}
+
+RaisedButton _button() {
+    return RaisedButton(
+      color: Colors.blue,
+      child: Text (
+        "OK",
+        style: TextStyle (
+          color: Colors.white,
+          fontSize: 20
+        ),
+      ),
+      onPressed: () =>  _onClickOK()  // Usando arrow function !
+      ,
+    );
+}
+
+void _onClickOK() {
+  print("Clicou no Botão OK");
 }
 
 Image _img() {
