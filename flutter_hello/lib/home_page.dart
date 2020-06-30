@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,7 +14,7 @@ class HomePage extends StatelessWidget {
 
   _body() {
     return Container(
-      color: Colors.white,
+      color: Colors.yellow,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -27,6 +28,7 @@ class HomePage extends StatelessWidget {
 
   Container _pageView() {
     return Container(
+      margin: EdgeInsets.all(20),
       height: 300,
       child: PageView(
         children: <Widget>[
