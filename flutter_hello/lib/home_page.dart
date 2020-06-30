@@ -5,7 +5,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Olá Flutter"),
+        title: Text("Hello Flutter"),
       ),
       body: _body(),
     );
@@ -18,21 +18,59 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _text(),
-          _img(),
-          _button()
+          _pageView(),
+          _buttons()
         ],
       ),
     );
   }
 
-  _button() {
+  Container _pageView() {
+    return Container(
+      height: 300,
+      child: PageView(
+        children: <Widget>[
+          _img("assets/images/dog1.png"),
+          _img("assets/images/dog2.png"),
+          _img("assets/images/dog3.png"),
+          _img("assets/images/dog4.png"),
+          _img("assets/images/dog5.png")
+        ],
+      ),
+    );
+  }
+
+  _buttons() {
+    return Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _button("ListView"),
+            _button("Page 2"),
+            _button("Page 3")
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _button("Snack"),
+            _button("Dialog"),
+            _button("Toast")
+          ],
+        )
+      ],
+    );
+  }
+
+  _button(String text) {
     return RaisedButton(
         color: Colors.blue,
         child: Text(
-          "OK",
+          text,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 30,
+            fontSize: 20,
           ),
         ),
         onPressed: _onClickOk
@@ -43,16 +81,16 @@ class HomePage extends StatelessWidget {
     print("Clicou no botão!");
   }
 
-  _img() {
+  _img(String img) {
     return Image.asset(
-      "assets/images/dog1.png",
+      img,
       fit: BoxFit.cover,
     );
   }
 
   _text() {
     return Text(
-      "Olá World",
+      "Hello World",
       style: TextStyle(
           color: Colors.blue,
           fontSize: 30,
