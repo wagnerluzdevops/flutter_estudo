@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hello/widgets/blue_button.dart';
 
-class HelloPage2 extends StatelessWidget {
+class HelloPage2 extends StatelessWidget  {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

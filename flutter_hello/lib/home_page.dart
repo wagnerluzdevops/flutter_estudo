@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Olá Flutter"),
+        title: Text("Hello Flutter"),
       ),
       body: _body(context),
     );
@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Container _pageView() {
+  _pageView() {
     return Container(
       margin: EdgeInsets.only(top:20, bottom: 20),
       height: 300,
@@ -67,10 +67,12 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void _onClickNavigator(BuildContext context, Widget page) {
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+  void _onClickNavigator(BuildContext context, Widget page) async {
+    String s = await Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
       return page;
     }));
+
+    print(">> $s");
   }
 
   _onClickSnack() {
@@ -116,5 +118,4 @@ class HomePage extends StatelessWidget {
           decorationStyle: TextDecorationStyle.wavy),
     );
   }
-
 }
