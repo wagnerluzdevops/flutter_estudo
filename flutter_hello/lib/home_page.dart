@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,27 +12,27 @@ class HomePage extends StatelessWidget {
   }
 
   _body() {
-    return Container(
-      // Ao inves de usar Padding, usar Container !!
-      color: Colors.green,
-      padding: const EdgeInsets.all(10),
-      child: Container (
-      color: Colors.yellow,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          _text(),
-          _pageView(),
-          _buttons()
-        ],
+    return SingleChildScrollView(
+      child: Container(
+        color: Colors.yellow,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _text(),
+            _pageView(),
+            _buttons(),
+            _text(),
+            _pageView(),
+            _buttons(),
+          ],
+        ),
       ),
-    ),
     );
   }
 
   Container _pageView() {
     return Container(
-      margin: EdgeInsets.all(20),
+      margin: EdgeInsets.only(top:20, bottom: 20),
       height: 300,
       child: PageView(
         children: <Widget>[
