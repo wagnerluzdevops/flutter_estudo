@@ -1,74 +1,66 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var scaffold = Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text("Olá Flutter"),
       ),
       body: _body(),
     );
-    return scaffold;
   }
-}
 
-Container _body() {
-  // Não precisaria do Container, vou deixar pra ficar explicito !
-  return Container(
-    color: Colors.white,
-    child: Center(
-      child:  _button(),
-    )
-  );
-}
-
-RaisedButton _button() {
-    return RaisedButton(
-      color: Colors.blue,
-      child: Text (
-        "OK",
-        style: TextStyle (
-          color: Colors.white,
-          fontSize: 20
-        ),
+  _body() {
+    return Container(
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _text(),
+          _img(),
+          _button()
+        ],
       ),
-      onPressed: () =>  _onClickOK()  // Usando arrow function !
-      ,
     );
-}
+  }
 
-void _onClickOK() {
-  print("Clicou no Botão OK");
-}
+  _button() {
+    return RaisedButton(
+        color: Colors.blue,
+        child: Text(
+          "OK",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+          ),
+        ),
+        onPressed: _onClickOk
+    );
+  }
 
-Image _img() {
-  return Image.asset(
-      'assets/images/dog2.png',
-    width: 300,
-    height: 300,
-    fit: BoxFit.fill
-  );
-//  return Image.network(
-//      'https://preview.free3d.com/img/2017/04/2140154274204616055/0ejxkp2a-900.jpg');
-}
+  void _onClickOk() {
+    print("Clicou no botão!");
+  }
 
-Text _text() {
-  return Text(
-    "Olá World",
-    style: TextStyle(
-      color: Colors.blue,
-      fontSize: 40,
-      fontWeight: FontWeight.bold,
-      fontStyle: FontStyle.italic,
-      decoration: TextDecoration.underline,
-      decorationColor: Colors.red,
-      decorationStyle: TextDecorationStyle.wavy,
-    ),
-  );
-}
+  _img() {
+    return Image.asset(
+      "assets/images/dog1.png",
+      fit: BoxFit.cover,
+    );
+  }
 
-Text _text2() {
-  return Text("Hello");
+  _text() {
+    return Text(
+      "Olá World",
+      style: TextStyle(
+          color: Colors.blue,
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,
+          decoration: TextDecoration.underline,
+          decorationColor: Colors.red,
+          decorationStyle: TextDecorationStyle.wavy),
+    );
+  }
 }
