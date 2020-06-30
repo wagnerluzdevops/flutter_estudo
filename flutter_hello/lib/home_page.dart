@@ -14,6 +14,10 @@ class HomePage extends StatelessWidget {
 
   _body() {
     return Container(
+      // Ao inves de usar Padding, usar Container !!
+      color: Colors.green,
+      padding: const EdgeInsets.all(10),
+      child: Container (
       color: Colors.yellow,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -23,6 +27,7 @@ class HomePage extends StatelessWidget {
           _buttons()
         ],
       ),
+    ),
     );
   }
 
