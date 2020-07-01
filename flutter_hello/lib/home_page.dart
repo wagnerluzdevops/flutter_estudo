@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hello/pages/hello_page1.dart';
+import 'package:flutter_hello/pages/hello_listview.dart';
 import 'package:flutter_hello/pages/hello_page2.dart';
 import 'package:flutter_hello/pages/hello_page3.dart';
+import 'package:flutter_hello/utils/nav.dart';
 import 'package:flutter_hello/widgets/blue_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,7 +10,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hello Flutter"),
+        title: Text("Olá Flutter"),
       ),
       body: _body(context),
     );
@@ -51,17 +52,17 @@ class HomePage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            BlueButton("ListView",onPressed: () => _onClickNavigator(context, HelloPage1())),
+            BlueButton("ListView",onPressed: () => _onClickNavigator(context, HelloListView())),
             BlueButton("Page 2", onPressed:() => _onClickNavigator(context, HelloPage2())),
-            BlueButton("Page 3",onPressed: () => _onClickNavigator(context, HelloPage3())),
+            BlueButton("Page 3", onPressed:() => _onClickNavigator(context, HelloPage3())),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             BlueButton("Snack",onPressed: _onClickSnack),
-            BlueButton("Dialog", onPressed:_onClickDialog),
-            BlueButton("Toast", onPressed:_onClickToast)
+            BlueButton("Dialog",onPressed: _onClickDialog),
+            BlueButton("Toast",onPressed: _onClickToast)
           ],
         )
       ],
@@ -69,19 +70,15 @@ class HomePage extends StatelessWidget {
   }
 
   void _onClickNavigator(BuildContext context, Widget page) async {
-    String s = await Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      return page;
-    }));
+
+    String s = await push(context, page);
 
     print(">> $s");
   }
-
   _onClickSnack() {
   }
-
   _onClickDialog() {
   }
-
   _onClickToast() {
   }
 
@@ -94,7 +91,7 @@ class HomePage extends StatelessWidget {
 
   _text() {
     return Text(
-      "Hello World",
+      "Olá World",
       style: TextStyle(
           color: Colors.blue,
           fontSize: 30,
