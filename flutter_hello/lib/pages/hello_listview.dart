@@ -43,32 +43,40 @@ class _HelloListViewState extends State<HelloListView> {
   }
 
   _body() {
-    List<Dog> dogs = [
-      Dog("Jack Russel", "assets/images/dog1.png"),
-      Dog("Labrador", "assets/images/dog2.png"),
-      Dog("Pug", "assets/images/dog3.png"),
-      Dog("Rottweiler", "assets/images/dog4.png"),
-      Dog("Pastor", "assets/images/dog5.png")
-    ];
-
-    if(_gridView) {
-      return GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: dogs.length,
-        itemBuilder: (BuildContext context, int index) {
-          return _itemView(dogs, index);
-        },
-      );
-    } else {
-      return ListView.builder(
-        itemExtent: 350,
-        itemCount: dogs.length,
-        itemBuilder: (BuildContext context, int index) {
-          return _itemView(dogs, index);
-        },
-      );
-    }
-
+    return ListView(
+      children: <Widget>[
+        _img("assets/images/dog1.png"),
+        _img("assets/images/dog2.png"),
+        _img("assets/images/dog3.png"),
+        _img("assets/images/dog4.png"),
+        _img("assets/images/dog5.png")
+      ],
+    );
+//    List<Dog> dogs = [
+//      Dog("Jack Russel", "assets/images/dog1.png"),
+//      Dog("Labrador", "assets/images/dog2.png"),
+//      Dog("Pug", "assets/images/dog3.png"),
+//      Dog("Rottweiler", "assets/images/dog4.png"),
+//      Dog("Pastor", "assets/images/dog5.png")
+//    ];
+//
+//    if(_gridView) {
+//      return GridView.builder(
+//        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+//        itemCount: dogs.length,
+//        itemBuilder: (BuildContext context, int index) {
+//          return _itemView(dogs, index);
+//        },
+//      );
+//    } else {
+//      return ListView.builder(
+//        itemExtent: 350,
+//        itemCount: dogs.length,
+//        itemBuilder: (BuildContext context, int index) {
+//          return _itemView(dogs, index);
+//        },
+//      );
+//    }
   }
 
   _itemView(List<Dog> dogs, int index) {
