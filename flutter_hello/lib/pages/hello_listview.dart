@@ -44,6 +44,7 @@ class _HelloListViewState extends State<HelloListView> {
 
   _body() {
     return ListView(
+      itemExtent: 350,
       children: <Widget>[
         _img("assets/images/dog1.png"),
         _img("assets/images/dog2.png"),

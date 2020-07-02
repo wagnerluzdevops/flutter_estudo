@@ -18,30 +18,49 @@ class HomePage extends StatelessWidget {
   }
 
   _body(context) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          flex: 7,
-          child: _pageView(),
-        ),
-        Expanded(
-          flex: 3,
-          child: _pageView(),
-        )
-      ],
+    return Container(
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _text(),
+          // Interessante, quando retiro o pageView  o texto fica na esquerda !!
+          _pageView(),
+          _buttons(context)
+        ],
+      ),
     );
   }
 
+//  _body(context) {
+//    return Column(
+//      children: <Widget>[
+//        Expanded(
+//          flex: 7,
+//          child: _pageView(),
+//        ),
+//        Expanded(
+//          flex: 3,
+//          child: _pageView(),
+//        )
+//      ],
+//    );
+//  }
+
   _pageView() {
-    return PageView(
-      children: <Widget>[
-        _img("assets/images/dog1.png"),
-        _img("assets/images/dog2.png"),
-        _img("assets/images/dog3.png"),
-        _img("assets/images/dog4.png"),
-        _img("assets/images/dog5.png")
-      ],
-    );
+    return Container(
+        margin: EdgeInsets.only(top: 20, bottom: 20),
+        height: 300,
+        // Se não incluir o heigth da erro, ele já explicou o porque !!
+        child: PageView(
+          children: <Widget>[
+            _img("assets/images/dog1.png"),
+            _img("assets/images/dog2.png"),
+            _img("assets/images/dog3.png"),
+            _img("assets/images/dog4.png"),
+            _img("assets/images/dog5.png")
+          ],
+        ));
   }
 
   _buttons(context) {
@@ -50,17 +69,20 @@ class HomePage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            BlueButton("ListView",onPressed: () => _onClickNavigator(context, HelloListView())),
-            BlueButton("Page 2", onPressed:() => _onClickNavigator(context, HelloPage2())),
-            BlueButton("Page 3", onPressed:() => _onClickNavigator(context, HelloPage3())),
+            BlueButton("ListView",
+                onPressed: () => _onClickNavigator(context, HelloListView())),
+            BlueButton("Page 2",
+                onPressed: () => _onClickNavigator(context, HelloPage2())),
+            BlueButton("Page 3",
+                onPressed: () => _onClickNavigator(context, HelloPage3())),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            BlueButton("Snack",onPressed: _onClickSnack),
-            BlueButton("Dialog",onPressed: _onClickDialog),
-            BlueButton("Toast",onPressed: _onClickToast)
+            BlueButton("Snack", onPressed: _onClickSnack),
+            BlueButton("Dialog", onPressed: _onClickDialog),
+            BlueButton("Toast", onPressed: _onClickToast)
           ],
         )
       ],
@@ -68,25 +90,22 @@ class HomePage extends StatelessWidget {
   }
 
   void _onClickNavigator(BuildContext context, Widget page) async {
-
     String s = await push(context, page);
 
     print(">> $s");
   }
 
-  _onClickSnack() {
-  }
+  _onClickSnack() {}
 
-  _onClickDialog() {
-  }
+  _onClickDialog() {}
 
-  _onClickToast() {
-  }
+  _onClickToast() {}
 
   _img(String img) {
     return Image.asset(
       img,
       fit: BoxFit.cover,
+      // expande as imagens
     );
   }
 
