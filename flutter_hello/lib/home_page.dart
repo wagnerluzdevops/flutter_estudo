@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hello/pages/hello_listview.dart';
+import 'package:flutter_hello/pages/hello_page1.dart';
 import 'package:flutter_hello/pages/hello_page2.dart';
 import 'package:flutter_hello/pages/hello_page3.dart';
 import 'package:flutter_hello/utils/nav.dart';
@@ -10,39 +11,36 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Olá Flutter"),
+        title: Text("Hello Flutter"),
       ),
       body: _body(context),
     );
   }
 
   _body(context) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          _text(),
-          _pageView(),
-          _buttons(context)
-        ],
-      ),
+    return Column(
+      children: <Widget>[
+        Expanded(
+          flex: 7,
+          child: _pageView(),
+        ),
+        Expanded(
+          flex: 3,
+          child: _pageView(),
+        )
+      ],
     );
   }
 
   _pageView() {
-    return Container(
-      margin: EdgeInsets.only(top:20, bottom: 20),
-      height: 300,
-      child: PageView(
-        children: <Widget>[
-          _img("assets/images/dog1.png"),
-          _img("assets/images/dog2.png"),
-          _img("assets/images/dog3.png"),
-          _img("assets/images/dog4.png"),
-          _img("assets/images/dog5.png")
-        ],
-      ),
+    return PageView(
+      children: <Widget>[
+        _img("assets/images/dog1.png"),
+        _img("assets/images/dog2.png"),
+        _img("assets/images/dog3.png"),
+        _img("assets/images/dog4.png"),
+        _img("assets/images/dog5.png")
+      ],
     );
   }
 
@@ -75,10 +73,13 @@ class HomePage extends StatelessWidget {
 
     print(">> $s");
   }
+
   _onClickSnack() {
   }
+
   _onClickDialog() {
   }
+
   _onClickToast() {
   }
 
@@ -91,7 +92,7 @@ class HomePage extends StatelessWidget {
 
   _text() {
     return Text(
-      "Olá World",
+      "Hello World",
       style: TextStyle(
           color: Colors.blue,
           fontSize: 30,
