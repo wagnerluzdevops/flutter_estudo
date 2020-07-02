@@ -1,1 +1,4 @@
 *.filecache
+/app.dill
+/kernel_snapshot.d
+/kernel_snapshot.stamp
