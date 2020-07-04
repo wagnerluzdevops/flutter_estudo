@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class Dog {
   String nome;
@@ -37,11 +38,19 @@ class HelloListView extends StatelessWidget {
           fit: StackFit.expand,
           children: <Widget>[
             _img(dog.foto),
-            Container(
+            Align(
               alignment: Alignment.topLeft,
-              child: Text(
-                dog.nome,
-                style: TextStyle(fontSize: 26, color: Colors.white),
+              child: Container(
+                margin: EdgeInsets.all(12),
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: Colors.black45,
+                  borderRadius: BorderRadius.circular(8)
+                ),
+                child: Text(
+                  dog.nome,
+                  style: TextStyle(fontSize: 26, color: Colors.white),
+                ),
               ),
             ),
           ],
