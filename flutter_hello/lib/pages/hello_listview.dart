@@ -20,19 +20,29 @@ class HelloListView extends StatelessWidget {
 
   _body() {
     List<Dog> dogs = [
-     Dog("Jack", "assets/images/dog1.png"),
-     Dog("Labrador", "assets/images/dog2.png"),
-     Dog("Pug", "assets/images/dog3.png"),
-     Dog("Rot", "assets/images/dog4.png"),
-     Dog("Pastor", "assets/images/dog5.png"),
+      Dog("Jack Russel", "assets/images/dog1.png"),
+      Dog("Labrador", "assets/images/dog2.png"),
+      Dog("Pug", "assets/images/dog3.png"),
+      Dog("Rottweiler", "assets/images/dog4.png"),
+      Dog("Pastor", "assets/images/dog5.png"),
     ];
 
     return ListView.builder(
       itemCount: dogs.length,
-      itemExtent: 350,
+      itemExtent: 300,
       itemBuilder: (BuildContext context, int index) {
         Dog dog = dogs[index];
-        return _img(dog.foto);
+
+        return Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            _img(dog.foto),
+            Text(
+              dog.nome,
+              style: TextStyle(fontSize: 26, color: Colors.white),
+            ),
+          ],
+        );
       },
     );
   }
