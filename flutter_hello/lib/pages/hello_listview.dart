@@ -1,80 +1,84 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
-class Dog {
-  String nome;
-  String foto;
-
-  Dog(this.nome, this.foto);
+class HelloListView extends StatefulWidget {
+  @override
+  _HelloListViewState createState() => _HelloListViewState();
 }
 
-class HelloListView extends StatelessWidget {
-  @override
+class _HelloListViewState extends State<HelloListView> {
+  var _gridOn = false;
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("ListView"),
+        title: Text("ListView & GridView"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.list),
+            onPressed: () {
+              setState(() {
+                _gridOn = false;
+              });
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.grid_on),
+            onPressed: () {
+              setState(() {
+                _gridOn = true;
+              });
+            },
+          )
+        ],
       ),
-      body: _body(),
+      body: Container(
+        color: Colors.white,
+        child: _listView(),
+      ),
     );
   }
 
-  _body() {
-    List<Dog> dogs = [
-      Dog("Jack Russel", "assets/images/dog1.png"),
-      Dog("Labrador", "assets/images/dog2.png"),
-      Dog("Pug", "assets/images/dog3.png"),
-      Dog("Rottweiler", "assets/images/dog4.png"),
-      Dog("Pastor", "assets/images/dog5.png"),
-      Dog("Jack Russel", "assets/images/dog1.png"),
-      Dog("Labrador", "assets/images/dog2.png"),
-      Dog("Pug", "assets/images/dog3.png"),
-      Dog("Rottweiler", "assets/images/dog4.png"),
-      Dog("Pastor", "assets/images/dog5.png"),
-      Dog("Jack Russel", "assets/images/dog1.png"),
-      Dog("Labrador", "assets/images/dog2.png"),
-      Dog("Pug", "assets/images/dog3.png"),
-      Dog("Rottweiler", "assets/images/dog4.png"),
-      Dog("Pastor", "assets/images/dog5.png"),
-      Dog("Jack Russel", "assets/images/dog1.png"),
-      Dog("Labrador", "assets/images/dog2.png"),
-      Dog("Pug", "assets/images/dog3.png"),
-      Dog("Rottweiler", "assets/images/dog4.png"),
-      Dog("Pastor", "assets/images/dog5.png"),
-    ];
+  _listView() {
+    List<String> dogs = List.generate(50, (idx) {
+      return "assets/images/dog${idx % 5 + 1}.png";
+    });
 
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-      itemCount: dogs.length,
-      itemBuilder: (BuildContext context, int index) {
-        Dog dog = dogs[index];
+    return _gridOn
+        ? GridView.builder(
+        gridDelegate:
+        SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemCount: dogs.length,
+        itemBuilder: (context, idx) {
+          return _listItem(dogs, idx);
+        })
+        : ListView.builder(
+        itemExtent: 250,
+        itemCount: dogs.length,
+        itemBuilder: (context, idx) {
+          return _listItem(dogs, idx);
+        });
+  }
 
-        return Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            _img(dog.foto),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                margin: EdgeInsets.all(12),
-                padding: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  color: Colors.black45,
-                  borderRadius: BorderRadius.circular(8)
-                ),
-                child: Text(
-                  dog.nome,
-                  style: TextStyle(fontSize: 26, color: Colors.white),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
+  _listItem(List<String> dogs, int idx) {
+    return Stack(
+      children: <Widget>[
+        SizedBox.expand(
+          child: _img(dogs[idx]),
+        ),
+        Container(
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(6),
+          decoration: BoxDecoration(color: Colors.black45),
+          child: Text(
+            "Dog ${idx + 1}",
+            style: TextStyle(fontSize: 25, color: Colors.white),
+          ),
+        )
+      ],
     );
   }
 
-  _img(String img) {
+  Image _img(String img) {
     return Image.asset(
       img,
       fit: BoxFit.cover,
