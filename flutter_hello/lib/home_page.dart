@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hello/pages/hello_listview.dart';
-import 'package:flutter_hello/pages/hello_page1.dart';
 import 'package:flutter_hello/pages/hello_page2.dart';
 import 'package:flutter_hello/pages/hello_page3.dart';
 import 'package:flutter_hello/utils/nav.dart';
 import 'package:flutter_hello/widgets/blue_button.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -103,12 +103,10 @@ class HomePage extends StatelessWidget {
     showDialog(
       context: context,
       barrierDismissible: false,
-      // Para não permitir que clicando fora ele feche !!
       builder: (context) {
         return WillPopScope(
           onWillPop: () async => false,
-//            Para não permitir que ao clicar no Voltar do Android ele feche o Dialog
-        child: AlertDialog(
+          child: AlertDialog(
             title: Text("Flutter é muito legal"),
             actions: <Widget>[
               FlatButton(
@@ -131,7 +129,17 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  _onClickToast() {}
+  _onClickToast() {
+    Fluttertoast.showToast(
+        msg: "Flutter é muito legal",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIos: 5,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+  }
 
   _img(String img) {
     return Image.asset(
