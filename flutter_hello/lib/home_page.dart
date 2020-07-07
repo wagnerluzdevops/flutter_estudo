@@ -24,68 +24,57 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _text(),
-          // Interessante, quando retiro o pageView  o texto fica na esquerda !!
           _pageView(),
-          _buttons(context)
+          _buttons(),
         ],
       ),
     );
   }
 
-//  _body(context) {
-//    return Column(
-//      children: <Widget>[
-//        Expanded(
-//          flex: 7,
-//          child: _pageView(),
-//        ),
-//        Expanded(
-//          flex: 3,
-//          child: _pageView(),
-//        )
-//      ],
-//    );
-//  }
-
   _pageView() {
     return Container(
-        margin: EdgeInsets.only(top: 20, bottom: 20),
-        height: 300,
-        // Se não incluir o heigth da erro, ele já explicou o porque !!
-        child: PageView(
-          children: <Widget>[
-            _img("assets/images/dog1.png"),
-            _img("assets/images/dog2.png"),
-            _img("assets/images/dog3.png"),
-            _img("assets/images/dog4.png"),
-            _img("assets/images/dog5.png")
-          ],
-        ));
+      margin: EdgeInsets.only(top: 20, bottom: 20),
+      height: 300,
+      child: PageView(
+        children: <Widget>[
+          _img("assets/images/dog1.png"),
+          _img("assets/images/dog2.png"),
+          _img("assets/images/dog3.png"),
+          _img("assets/images/dog4.png"),
+          _img("assets/images/dog5.png")
+        ],
+      ),
+    );
   }
 
-  _buttons(context) {
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  _buttons() {
+    return Builder(
+      builder: (context) {
+        return Column(
           children: <Widget>[
-            BlueButton("ListView",
-                onPressed: () => _onClickNavigator(context, HelloListView())),
-            BlueButton("Page 2",
-                onPressed: () => _onClickNavigator(context, HelloPage2())),
-            BlueButton("Page 3",
-                onPressed: () => _onClickNavigator(context, HelloPage3())),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                BlueButton("ListView",
+                    onPressed: () =>
+                        _onClickNavigator(context, HelloListView())),
+                BlueButton("Page 2",
+                    onPressed: () => _onClickNavigator(context, HelloPage2())),
+                BlueButton("Page 3",
+                    onPressed: () => _onClickNavigator(context, HelloPage3())),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                BlueButton("Snack", onPressed: () => _onClickSnack(context)),
+                BlueButton("Dialog", onPressed: _onClickDialog),
+                BlueButton("Toast", onPressed: _onClickToast)
+              ],
+            )
           ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            BlueButton("Snack", onPressed: _onClickSnack),
-            BlueButton("Dialog", onPressed: _onClickDialog),
-            BlueButton("Toast", onPressed: _onClickToast)
-          ],
-        )
-      ],
+        );
+      },
     );
   }
 
@@ -95,7 +84,20 @@ class HomePage extends StatelessWidget {
     print(">> $s");
   }
 
-  _onClickSnack() {}
+  _onClickSnack(context) {
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Olá Flutter"),
+        action: SnackBarAction(
+          textColor: Colors.yellow,
+          label: "OK",
+          onPressed: () {
+            print("OK!");
+          },
+        ),
+      ),
+    );
+  }
 
   _onClickDialog() {}
 
@@ -105,7 +107,6 @@ class HomePage extends StatelessWidget {
     return Image.asset(
       img,
       fit: BoxFit.cover,
-      // expande as imagens
     );
   }
 
