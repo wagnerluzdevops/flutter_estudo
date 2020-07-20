@@ -14,32 +14,20 @@ class HomePage extends StatelessWidget {
         title: Text("Hello Flutter"),
       ),
       body: _body(context),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () {
-              _onClickFab("Adicionar");
-            },
-          ),
-          SizedBox(
-            width: 8,
-            height: 8,
-          ),
-          FloatingActionButton(
-            child: Icon(Icons.favorite),
-            onPressed: () {
-              _onClickFab("Favoritar");
-            },
-          )
-        ],
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          _onClickFab();
+        },
+      ),
+      drawer: Drawer(
+
       ),
     );
   }
 
-  _onClickFab(msg) {
-    print(msg);
+  _onClickFab() {
+    print("Adicionar");
   }
 
   _body(context) {
