@@ -14,14 +14,40 @@ class HomePage extends StatelessWidget {
         title: Text("Hello Flutter"),
       ),
       body: _body(context),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () {
+              _onClickFab("Adicionar");
+            },
+          ),
+          SizedBox(
+            width: 8,
+            height: 8,
+          ),
+          FloatingActionButton(
+            child: Icon(Icons.favorite),
+            onPressed: () {
+              _onClickFab("Favoritar");
+            },
+          )
+        ],
+      ),
     );
+  }
+
+  _onClickFab(msg) {
+    print(msg);
   }
 
   _body(context) {
     return Container(
+      padding: EdgeInsets.only(top: 16),
       color: Colors.white,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           _text(),
           _pageView(),
@@ -137,8 +163,7 @@ class HomePage extends StatelessWidget {
         timeInSecForIos: 5,
         backgroundColor: Colors.green,
         textColor: Colors.white,
-        fontSize: 16.0
-    );
+        fontSize: 16.0);
   }
 
   _img(String img) {
